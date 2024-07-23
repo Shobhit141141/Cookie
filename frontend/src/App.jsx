@@ -4,7 +4,7 @@ import "./App.css";
 function App() {
   const setCookie = async () => {
     try {
-      await axios.get("http://localhost:5000/set-cookie", {
+      await axios.get("https://cookie-omega-six.vercel.app/set-cookie", {
         withCredentials: true,
       });
       alert("Cookie has been set");
@@ -16,7 +16,7 @@ function App() {
   const getCookie = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/get-cookie",
+        "https://cookie-omega-six.vercel.app/get-cookie",
         { withCredentials: true }
       );
       alert(response.data);
