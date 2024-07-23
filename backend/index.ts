@@ -27,6 +27,7 @@ app.get('/set-cookie', (req, res) => {
 // Endpoint to get a cookie
 app.get('/get-cookie', (req, res) => {
   const myCookie = req.cookies.myCookie;
+  console.log("my cookie : ", myCookie);
   if (myCookie) {
     res.send(`Cookie value: ${myCookie}`);
   } else {
