@@ -1,10 +1,9 @@
-// src/index.ts
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.use(cookieParser());
 
@@ -18,9 +17,9 @@ app.use(cors({
 app.get('/set-cookie', (req, res) => {
   res.cookie('myCookie', 'cookieValue', {
     httpOnly: true, // accessible only by the web server
-    secure: true, // set to true if your using https
-    maxAge: 24 * 60 * 60 * 1000, // 24 hours,
-    sameSite:'lax'
+    secure: true, // set to true if using https
+    sameSite: 'none', // required for cross-site cookies
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
   });
   res.send('Cookie has been set');
 });
@@ -28,7 +27,6 @@ app.get('/set-cookie', (req, res) => {
 // Endpoint to get a cookie
 app.get('/get-cookie', (req, res) => {
   const myCookie = req.cookies.myCookie;
-  console.log("my cookie : ", myCookie);
   if (myCookie) {
     res.send(`Cookie value: ${myCookie}`);
   } else {
