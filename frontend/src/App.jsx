@@ -1,13 +1,15 @@
+import React from "react";
+import axios from "axios";
 import "./App.css";
+
+// Set withCredentials to true for all axios requests
+axios.defaults.withCredentials = true;
 
 function App() {
   const setCookie = async () => {
     try {
-      const response = await fetch("https://cookie-omega-six.vercel.app/set-cookie", {
-        method: 'GET',
-        credentials: 'include',
-      });
-      if (response.ok) {
+      const response = await axios.get("https://cookie-omega-six.vercel.app/set-cookie");
+      if (response.status === 200) {
         alert("Cookie has been set");
       } else {
         throw new Error("Network response was not ok.");
@@ -19,13 +21,9 @@ function App() {
 
   const getCookie = async () => {
     try {
-      const response = await fetch("https://cookie-omega-six.vercel.app/get-cookie", {
-        method: 'GET',
-        credentials: 'include',
-      });
-      if (response.ok) {
-        const data = await response.json();
-        alert(data);
+      const response = await axios.get("https://cookie-omega-six.vercel.app/get-cookie");
+      if (response.status === 200) {
+        alert(JSON.stringify(response.data));
       } else {
         throw new Error("Network response was not ok.");
       }
