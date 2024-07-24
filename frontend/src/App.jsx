@@ -1,13 +1,17 @@
-import axios from 'axios';
 import "./App.css";
 
 function App() {
   const setCookie = async () => {
     try {
-      await axios.get("https://cookie-omega-six.vercel.app/set-cookie", {
-        withCredentials: true,
+      const response = await fetch("https://cookie-omega-six.vercel.app/set-cookie", {
+        method: 'GET',
+        credentials: 'include',
       });
-      alert("Cookie has been set");
+      if (response.ok) {
+        alert("Cookie has been set");
+      } else {
+        throw new Error("Network response was not ok.");
+      }
     } catch (error) {
       console.error("Error setting cookie:", error);
     }
@@ -15,11 +19,16 @@ function App() {
 
   const getCookie = async () => {
     try {
-      const response = await axios.get(
-        "https://cookie-omega-six.vercel.app/get-cookie",
-        { withCredentials: true }
-      );
-      alert(response.data);
+      const response = await fetch("https://cookie-omega-six.vercel.app/get-cookie", {
+        method: 'GET',
+        credentials: 'include',
+      });
+      if (response.ok) {
+        const data = await response.json();
+        alert(data);
+      } else {
+        throw new Error("Network response was not ok.");
+      }
     } catch (error) {
       console.error("Error getting cookie:", error);
     }
