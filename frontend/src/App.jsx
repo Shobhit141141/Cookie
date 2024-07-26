@@ -16,7 +16,7 @@ function App() {
       console.error("Error setting cookie:", error);
     }
   };
-
+// https://cookie-omega-six.vercel.app
   const getCookie = async () => {
     try {
       const response = await fetch("https://cookie-omega-six.vercel.app/get-cookie", {
